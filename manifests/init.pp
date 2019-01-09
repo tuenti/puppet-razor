@@ -68,9 +68,28 @@ class razor (
   # Microkernel
   $microkernel_url          = $razor::params::microkernel_url,
   $repo_store               = $razor::params::repo_store,
+
+  # Version-specific defaults
+  $enable_new_ports_support = false,
+
+  # Override defaults
+  $server_http_port         = undef,
 ) inherits razor::params {
+  # Ports
+  if ($enable_new_ports_support) {
+    $default_server_http_port  = 8150
+  } else {
+    $default_server_http_port  = 8080
+  }
+
   # Validation
   validate_bool($enable_client, $enable_db, $enable_server, $compile_microkernel)
+
+  if ($server_http_port == undef) {
+    $real_server_http_port = $default_server_http_port
+  } else {
+    $real_server_http_port = $server_http_port
+  }
 
   # Dependencies
   anchor { 'razor-server-dependencies': }
