@@ -8,12 +8,6 @@ mod 'puppetlabs-concat'
 mod 'puppetlabs-vcsrepo'
 mod 'puppetlabs-xinetd'
 mod 'maestrodev-wget'
+mod 'puppet-archive'
+mod 'puppetlabs-tftp'
 
-mod 'archive',
-  :git => "https://github.com/lavaburn/puppet-archive.git", 
-  :ref => "0.2.0-1"
-
-mod 'tftp',
-  :git => "https://github.com/lavaburn/puppetlabs-tftp.git", 
-  :ref => "0.2.2-1"
-  
