@@ -17,21 +17,26 @@ class Puppet::Provider::Rest < Puppet::Provider
   end
   
   def self.get_rest_info
-    # Shiro Authentication is not (yet) configured. Authentication could possibly happen here?
+    config_file = "/etc/razor/api.yaml"
+
+    data = File.read(config_file) or raise "Could not read setting file #{config_file}"    
+    yamldata = YAML.load(data)
     
-    # IP Address:
-       # As long as the custom types are configured on the same host as razor server is configured, the IP will be localhost.
-       # I can not find any reasons why you would want the custom type to be configured on another host...
-    # Port: 
-      # The port config is very well hidden in torquebox (jboss) configuration. 
-      # It's very unlikely that it will be changed.    
+    if yamldata.include?('hostname')
+      hostname = yamldata['hostname']
+    else
+      hostname = 'localhost'
+    end    
     
-    # If the above changes, read the below variables from a config file
+    if yamldata.include?('api_port')
+      port = yamldata['api_port']
+    else
+      port = 8150
+    end
     
-    ip = '127.0.0.1'
-    port = '8080'
-           
-    { :ip   => ip,
+    # TODO - Shiro Authentication
+        
+    { :ip   => hostname,
       :port => port }
   end
   
@@ -92,14 +97,24 @@ class Puppet::Provider::Rest < Puppet::Provider
     rescue => e
       Puppet.debug "Razor REST response: "+e.inspect
       Puppet.warning "Unable to contact Razor Server through REST interface (#{url})"
+      return nil
     end
   
     begin
       responseJson = JSON.parse(response)
     rescue
-      raise "Could not parse the JSON response from Razor: " + response
+      raise "Could not parse the JSON response from Razor: #{response}"
     end
   
     responseJson
+  end
+  
+  def self.get_server_version()
+    rest = get_rest_info
+    url = "http://#{rest[:ip]}:#{rest[:port]}/api"    
+    
+    responseJson = get_json_from_url(url)
+    version = responseJson["version"]["server"] || "Unknown"            
+    version
   end
 end
