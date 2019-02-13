@@ -14,8 +14,10 @@
 # Nicolas Truyens <nicolas@truyens.com>
 #
 class razor::api (
-  $hostname = 'localhost',
-  $port = undef,
+  $hostname            = 'localhost',
+  $port                = undef,
+  $rest_client_version = present,
+  $gem_provider        = 'puppet_gem',
   # TODO - Shiro Authentication
 ) {
   # Parameters
@@ -46,5 +48,5 @@ class razor::api (
   }
 
   # Dependency Gems Installation
-  #ensure_packages(['rest-client'], {'ensure' => 'present', 'provider' => 'puppet_gem'})
+  ensure_packages(['rest-client'], {'ensure' => $rest_client_version, 'provider' => $gem_provider})
 }
