@@ -74,6 +74,7 @@ class razor (
 
   # Override defaults
   $server_http_port         = undef,
+  $data_dir                 = undef,
 ) inherits razor::params {
   # Ports
   if ($enable_new_ports_support) {
@@ -89,6 +90,15 @@ class razor (
     $real_server_http_port = $default_server_http_port
   } else {
     $real_server_http_port = $server_http_port
+  }
+
+  # Paths
+  $default_data_dir = '/opt/razor'
+
+  if ($data_dir == undef) {
+    $data_root_path = $default_data_dir
+  } else {
+    $data_root_path = $data_dir
   }
 
   # Dependencies
