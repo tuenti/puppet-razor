@@ -120,6 +120,7 @@ class razor::server inherits razor {
   ->
   service { $::razor::server_service_name:
     ensure => 'running',
+    enable => true,
   }
 
   # Setup the Database
