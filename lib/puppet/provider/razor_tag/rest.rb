@@ -54,8 +54,9 @@ Puppet::Type.type(:razor_tag).provide :rest, :parent => Puppet::Provider::Rest d
   
   def update_tag
     resourceHash = {                    
-      :name => resource[:name],
-      :rule => resource[:rule]
+      :name  => resource[:name],
+      :rule  => resource[:rule],
+      :force => true
     }
     post_command('update-tag-rule', resourceHash)
     
