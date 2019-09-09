@@ -8,6 +8,7 @@
 #
 define razor::razor_yaml_setting (
   Any                       $value, # Untyped - can be many things
+  String                    $key         = $name,
   Enum['present', 'absent'] $ensure      = 'present',
   String                    $target      = $::razor::server_config_path,
   String                    $export_tag  = 'razor-server'
