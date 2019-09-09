@@ -16,7 +16,6 @@ define razor::razor_yaml_setting (
   concat::fragment { $name:
     ensure  => $ensure,
     content => to_yaml({ $key => $value }),
-    key     => $name,
     target  => $target,
     tag     => $export_tag,
   }
