@@ -13,10 +13,11 @@ define razor::razor_yaml_setting (
   String                    $target      = $::razor::server_config_path,
   String                    $export_tag  = 'razor-server'
 ) {
-  concat::fragment { $name:
-    ensure  => $ensure,
-    content => to_yaml({ $key => $value }),
-    target  => $target,
-    tag     => $export_tag,
+  if $ensure == 'present' {
+    concat::fragment { $name:
+      content => to_yaml({ $key => $value }),
+      target  => $target,
+      tag     => $export_tag,
+    }
   }
 }
