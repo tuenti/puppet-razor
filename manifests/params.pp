@@ -29,6 +29,8 @@ class razor::params {
 
   $server_config_file  = 'config.yaml'
   $server_service_name = 'razor-server'
+  $server_config_default = {
+  }
 
   $microkernel_url = 'http://links.puppetlabs.com/razor-microkernel-latest.tar'
 

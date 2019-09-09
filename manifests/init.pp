@@ -19,6 +19,7 @@
 # * torquebox_package_name (string): See Params
 # * torquebox_package_version (string): Package version for Torquebox (Default: 'present')
 # * server_config_file (string): See Params
+# * server_base_config (hash): See Params
 # * server_service_name (string): See Params
 # * server_hostname (string): The hostname of the TFTP server. (Default: $::ipaddress)
 # * tftp_root (string): The root directory for the TFTP server. (Default: undef)
@@ -77,6 +78,7 @@ class razor (
   String $torquebox_package_name    = $razor::params::torquebox_package_name,
   String $torquebox_package_version = 'present',
   String $server_config_file        = $razor::params::server_config_file,
+  Hash   $server_base_config        = $razor::params::server_config_default,
   String $server_service_name       = $razor::params::server_service_name,
 
   # TFTP

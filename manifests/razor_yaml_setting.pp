@@ -7,18 +7,16 @@
 # Jeremy Custenborder <jcustenborder@gmail.com>
 #
 define razor::razor_yaml_setting (
-  $value, # Untyped - can be many things
-  Variant[Undef, String] $value_type = undef,
-  Enum['present', 'absent'] $ensure = 'present',
-  String $target      = $::razor::server_config_path,
-  String $export_tag  = 'razor-server'
+  Any                       $value, # Untyped - can be many things
+  Enum['present', 'absent'] $ensure      = 'present',
+  String                    $target      = $::razor::server_config_path,
+  String                    $export_tag  = 'razor-server'
 ) {
-  yaml_setting { $name:
-    ensure => $ensure,
-    key    => $name,
-    target => $target,
-    type   => $value_type,
-    value  => $value,
-    tag    => $export_tag,
+  concat::fragment { $name:
+    ensure  => $ensure,
+    content => to_yaml({ $key => $value }),
+    key     => $name,
+    target  => $target,
+    tag     => $export_tag,
   }
 }

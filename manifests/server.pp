@@ -175,7 +175,7 @@ class razor::server inherits razor {
   }
 
   # Ordering
-  Package[$::razor::server_package_name] -> Yaml_setting<| tag == 'razor-server' |> -> Service[$::razor::server_service_name]
-  Yaml_setting<| tag == 'razor-server' |> ~> Exec['razor-migrate-database']
-  Yaml_setting<| tag == 'razor-server' |> ~> Service[$::razor::server_service_name]
+  Package[$::razor::server_package_name] -> Concat::Fragment<| tag == 'razor-server' |> -> Service[$::razor::server_service_name]
+  Concat::Fragment<| tag == 'razor-server' |> ~> Exec['razor-migrate-database']
+  Concat::Fragment<| tag == 'razor-server' |> ~> Service[$::razor::server_service_name]
 }
