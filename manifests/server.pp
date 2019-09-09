@@ -103,6 +103,8 @@ class razor::server inherits razor {
     }
   }
 
+  include 'razor::config'
+
   # Installation
   if ($::razor::enable_aio_support == false) {
     # Torquebox was auto-dependency < 1.0.0, but no longer by 1.3.0
