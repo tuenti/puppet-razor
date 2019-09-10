@@ -23,7 +23,8 @@ class razor::mk_extension (
     ensure => 'present',
     value  => {
       'all' => {
-      'mk_extension' => "${::razor::data_root_path}/mk-extension.zip",
+        'mk_extension' => "${::razor::data_root_path}/mk-extension.zip",
+      },
     },
   }
 }
