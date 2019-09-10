@@ -182,10 +182,10 @@ class razor::server inherits razor {
 
   create_resources('razor::task',         $::razor::tasks)
   create_resources('razor::broker',       $::razor::brokers)
-  create_resources('razor::razor_tag',    $::razor::tags)
-  create_resources('razor::razor_policy', $::razor::policies)
-  create_resources('razor::razor_repo',   $::razor::repos)
-  create_resources('razor::razor_broker', $::razor::api_brokers)
+  create_resources('razor_tag',    $::razor::tags)
+  create_resources('razor_policy', $::razor::policies)
+  create_resources('razor_repo',   $::razor::repos)
+  create_resources('razor_broker', $::razor::api_brokers)
 
   # Ordering
   Package[$::razor::server_package_name] -> Concat[$::razor::server_config_path] -> Service[$::razor::server_service_name]
@@ -193,8 +193,8 @@ class razor::server inherits razor {
   Concat[$::razor::server_config_path] ~> Service[$::razor::server_service_name]
   Package[$::razor::server_package_name] -> Razor::Task<| |>
   Package[$::razor::server_package_name] -> Razor::Broker<| |>
-  Service[$::razor::server_service_name] -> Razor::Razor_tag<| |>
-  Service[$::razor::server_service_name] -> Razor::Razor_policy<| |>
-  Service[$::razor::server_service_name] -> Razor::Razor_repo<| |>
-  Service[$::razor::server_service_name] -> Razor::Razor_broker<| |>
+  Service[$::razor::server_service_name] -> Razor_tag<| |>
+  Service[$::razor::server_service_name] -> Razor_policy<| |>
+  Service[$::razor::server_service_name] -> Razor_repo<| |>
+  Service[$::razor::server_service_name] -> Razor_broker<| |>
 }
