@@ -18,7 +18,7 @@ class razor::config inherits razor {
   concat::fragment { 'default razor server config':
     content => to_yaml($::razor::server_base_config),
     target  => $::razor::server_config_path,
-    order   => '00',
+    order   => '99',
   }
 }
 
