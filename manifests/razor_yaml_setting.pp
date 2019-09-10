@@ -13,7 +13,7 @@ define razor::razor_yaml_setting (
 ) {
   if $ensure == 'present' {
     concat::fragment { $name:
-      content => to_yaml({ $key => $value }),
+      content => to_yaml($value),
       target  => $target,
       order   => '50',
     }
