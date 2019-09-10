@@ -28,6 +28,12 @@
 # * match_nodes_on (array): See Params
 # * enable_new_ports_support (boolean): Whether to use the new ports allocated from Razor 1.1.0  (Default: false)
 # * enable_aio_support (boolean): Whether to use AIO package paths from Razor 1.4.0  (Default: false)
+# * tasks (Hash): Hash of razor::task resources to be created using create_resources.
+# * brokers (Hash): Hash of razor::broker resources to be created using create_resources.
+# * tags (Hash): Hash of razor::razor_tag resources to be created using create_resources.
+# * repos (Hash): Hash of razor::razor_repo resources to be created using create_resources.
+# * api_brokers (Hash): Hash of razor::razor_broker resources to be created using create_resources.
+# * policies (Hash): Hash of razor::razor_policy resources to be created using create_resources.
 # * server_http_port (string): HTTP server port name/number - Deprecated, use enable_new_ports_support instead.
 # * server_https_port (string): HTTPS server port name/number - Deprecated, use enable_new_ports_support instead.
 # * config_dir (path): Path where configuration files are stored  - Deprecated, use enable_aio_support instead.
@@ -96,6 +102,14 @@ class razor (
   # Version-specific defaults
   Boolean $enable_new_ports_support = false,
   Boolean $enable_aio_support       = false,
+
+  # Create resources
+  Hash[String, Hash] $tasks       = {},
+  Hash[String, Hash] $brokers     = {},
+  Hash[String, Hash] $tags        = {},
+  Hash[String, Hash] $repos       = {},
+  Hash[String, Hash] $api_brokers = {},
+  Hash[String, Hash] $policies    = {},
 
   # Override defaults
   Variant[Undef, Integer] $server_http_port  = undef,
@@ -226,5 +240,5 @@ class razor (
     contain razor::microkernel::compile
   }
 
-  # Shiro Authentication is not (yet) implemented. See notes in lib/puppet/provider/razo_rest.rb if you implement it.
+  # Shiro Authentication is not (yet) implemented. See notes in lib/puppet/provider/razor_rest.rb if you implement it.
 }
