@@ -121,24 +121,23 @@ class razor::server inherits razor {
   # Configuration File
   ::razor::razor_yaml_setting{ 'production.database_url':
     ensure => 'present',
-    key    => 'production',
     value  => {
-      'database_url'=> "jdbc:postgresql://${::razor::database_hostname}/${::razor::database_name}?user=${::razor::database_username}&password=${::razor::database_password}",
+      'production'   => {
+        'database_url' => "jdbc:postgresql://${::razor::database_hostname}/${::razor::database_name}?user=${::razor::database_username}&password=${::razor::database_password}",
+      },
     },
-  }
-
-  ::razor::razor_yaml_setting{ 'all.repo_store_root':
-    ensure => 'present',
-    key    => 'all',
-    value  => {'repo_store_root' =>$::razor::repo_store_path},
   }
 
   # Required configuration for database migration.
   # Configuration file is purged on downgrade from 1.5 to 1.3...
-  ::razor::razor_yaml_setting{ 'all.match_nodes_on':
+  ::razor::razor_yaml_setting{ 'all custom settings':
     ensure => 'present',
-    key    => 'all',
-    value  =>  {'match_nodes_on' => $::razor::match_nodes_on},
+    value  => {
+      'all' => {
+        'repo_store_root' => $::razor::repo_store_path,
+        'match_nodes_on'  => $::razor::match_nodes_on,
+      },
+    },
   }
 
   # Service
