@@ -32,6 +32,65 @@ class razor::params {
   $server_config_file  = 'config.yaml'
   $server_service_name = 'razor-server'
   $server_config_default = {
+    'production' => {
+      'database_url' => 'jdbc:postgresql:razor_prd?user=razor&password=mypass',
+    },
+    'development' => {
+      'database_url' => 'jdbc:postgresql:razor_dev',
+    },
+    'test' => {
+      'database_url' => 'jdbc:postgresql:razor?user=razor&password=mypass',
+    },
+    'all' => {
+      'auth' => {
+        'enabled'         => false,
+        'config'          => 'shiro.ini',
+        'allow_localhost' => false,
+      },
+      'microkernel' => {
+        'debug_level' => 'debug',
+        'kernel_args' => '',
+        # 'extension-zip' => '/etc/puppetlabs/razor-server/mk-extension.zip',
+      },
+      'secure_api'          => false,
+      'protect_new_nodes'   => true,
+      'store_hook_input'    => true,
+      'store_hook_output'   => true,
+      'match_nodes_on'      => ['mac'],
+      'checkin_interval'    => 15,
+      'task_path'           => 'tasks',
+      'repo_store_root'     => '/opt/puppetlabs/server/data/razor-server/repo',
+      'broker_path'         => 'brokers',
+      'hook_path'           => 'hooks',
+      'hook_execution_path' => '',
+      'facts'               => {
+        'blacklist'         => [
+          'domain',
+          'filesystems',
+          'fqdn',
+          'hostname',
+          'id',
+          '/kernel.*/',
+          'memoryfree',
+          'memorysize',
+          'memorytotal',
+          '/operatingsystem.*/',
+          'osfamily',
+          'path',
+          'ps',
+          'rubysitedir',
+          'rubyversion',
+          'selinux',
+          'sshdsakey',
+          '/sshfp_[dr]sa/',
+          'sshrsakey',
+          '/swap.*/',
+          'timezone',
+          '/uptime.*/',
+        ],
+      },
+      'api_config_blacklist' => ['database_url', 'facts.blacklist'],
+    },
   }
 
   $microkernel_url = 'http://links.puppetlabs.com/razor-microkernel-latest.tar'
