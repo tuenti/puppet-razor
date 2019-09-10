@@ -18,8 +18,8 @@ class razor::tftp inherits razor {
   }
 
   # undionly.kpxe
-  wget::fetch { 'http://boot.ipxe.org/undionly.kpxe':
-    destination => "${directory}/undionly.kpxe",
+  archive { "${directory}/undionly.kpxe",
+    source => 'http://boot.ipxe.org/undionly.kpxe',
   } ->
 
   tftp::file { 'undionly.kpxe':
@@ -28,8 +28,8 @@ class razor::tftp inherits razor {
   }
 
   # bootstrap.ipxe
-  wget::fetch { "http://${::razor::server_hostname}:${::razor::real_server_http_port}/api/microkernel/bootstrap":
-    destination => "${directory}/bootstrap.ipxe",
+  archive { "${directory}/bootstrap.ipxe",
+    source => "http://${::razor::server_hostname}:${::razor::real_server_http_port}/api/microkernel/bootstrap",
   } ->
 
   tftp::file { 'bootstrap.ipxe':
