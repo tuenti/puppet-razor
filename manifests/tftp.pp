@@ -18,7 +18,7 @@ class razor::tftp inherits razor {
   }
 
   # undionly.kpxe
-  archive { "${directory}/undionly.kpxe",
+  archive { "${directory}/undionly.kpxe":
     source => 'http://boot.ipxe.org/undionly.kpxe',
   } ->
 
@@ -28,7 +28,7 @@ class razor::tftp inherits razor {
   }
 
   # bootstrap.ipxe
-  archive { "${directory}/bootstrap.ipxe",
+  archive { "${directory}/bootstrap.ipxe":
     source => "http://${::razor::server_hostname}:${::razor::real_server_http_port}/api/microkernel/bootstrap",
   } ->
 
