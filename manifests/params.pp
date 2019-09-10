@@ -5,6 +5,7 @@
 # Parameters:
 #   * compile_microkernel (boolean): Whether to compile the microkernel (only supported on RedHat)
 #   * client_package_name (string): Package name for Razor Client
+#   * client_package_mirror (string): Rubygems mirror where to download Razor Client gem
 #   * server_package_name (string): Package name for Razor Server
 #   * torquebox_package_name (string): Package name for Torquebox
 #   * server_config_file (string): Filename for configuration of Razor Server
@@ -24,6 +25,7 @@ class razor::params {
   }
 
   $client_package_name    = 'razor-client'
+  $client_package_mirror  = 'https://rubygems.org'
   $server_package_name    = 'razor-server'
   $torquebox_package_name = 'razor-torquebox'
 

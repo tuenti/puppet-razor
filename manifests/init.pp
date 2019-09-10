@@ -10,6 +10,7 @@
 # * compile_microkernel (boolean): See Params
 # * client_package_name (string): See Params
 # * client_package_version (string): Package version for Razor Client (Default: 'latest')
+# * client_package_mirror (string): See params
 # * database_hostname (string): Hostname for Postgres DB (Default: 'localhost')
 # * database_name (string): Database name for Postgres DB (Default: 'razor_prod')
 # * database_username (string): Username for Postgres DB (Default: 'razor')
@@ -64,6 +65,7 @@ class razor (
 
   # Client
   String $client_package_name                    = $razor::params::client_package_name,
+  String $client_package_mirror                  = $razor::params::client_package_mirror,
   Variant[Undef, String] $client_package_version = undef,
 
   # DB
