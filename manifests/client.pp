@@ -24,8 +24,8 @@ class razor::client inherits razor {
 
   # Install the ruby gem
   ensure_packages([$::razor::client_package_name], {
-    'ensure' => $real_client_package_version,
+    'ensure'          => $real_client_package_version,
     'install_options' => ['--source', $::razor::client_package_mirror],
-    'provider' => 'puppet_gem',
+    'provider'        => 'puppet_gem',
   })
 }

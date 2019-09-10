@@ -48,5 +48,9 @@ class razor::api (
   }
 
   # Dependency Gems Installation
-  ensure_packages(['rest-client'], {'ensure' => $rest_client_version, 'provider' => $gem_provider})
+  ensure_packages(['rest-client'], {
+    'ensure'          => $rest_client_version,
+    'install_options' => ['--source', $::razor::client_package_mirror],
+    'provider'        => $gem_provider,
+  })
 }
