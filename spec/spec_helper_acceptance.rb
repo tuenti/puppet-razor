@@ -60,12 +60,10 @@ RSpec.configure do |c|
         end
 
         # Setup puppet module dependencies
-        on agent, puppet('module','install','puppet/wget'),           { :acceptable_exit_codes => [0,1] }
         on agent, puppet('module','install','puppet/archive'),        { :acceptable_exit_codes => [0,1] }
         on agent, puppet('module','install','puppetlabs/postgresql'), { :acceptable_exit_codes => [0,1] }
         on agent, puppet('module','install','puppetlabs/tftp'),       { :acceptable_exit_codes => [0,1] }          
         on agent, puppet('module','install','puppetlabs/vcsrepo'),    { :acceptable_exit_codes => [0,1] }          
-        on agent, puppet('module','install','reidmv/yamlfile'),       { :acceptable_exit_codes => [0,1] }
       end
       
       # Always copy this module

@@ -36,7 +36,6 @@ class example::profile {
       directory => '/var/lib/tftpboot',
       address   => 'localhost',
     }
-    include 'wget'
 
   # Razor Configuration - Precompiled Microkernel
   class { 'razor':
