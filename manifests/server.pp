@@ -168,6 +168,8 @@ class razor::server inherits razor {
   Package[$::razor::server_package_name] -> File[$::razor::server_config_path] -> Service[$::razor::server_service_name]
   File[$::razor::server_config_path] ~> Exec['razor-migrate-database']
   File[$::razor::server_config_path] ~> Service[$::razor::server_service_name]
+  Razor::Hook_type<| |> -> Razor_hook<| |>
+  Razor::Broker<| |> -> Razor_broker<| |>
   Package[$::razor::server_package_name] -> Razor::Task<| |>
   Package[$::razor::server_package_name] -> Razor::Broker<| |>
   Package[$::razor::server_package_name] -> Razor::Hook_type<| |>
