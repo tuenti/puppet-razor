@@ -33,7 +33,8 @@ PuppetLint::RakeTask.new :lint do |config|
 end
 
 Ra10ke::RakeTask.new
-FastGettext.default_text_domain = 'default-text-domain'
+# FastGettext.default_text_domain = 'default-text-domain'
+FastGettext.add_text_domain('default-text-domain', path: 'spec/locale')
 
 # Group tests
 desc "Run syntax, lint, and spec tests."
