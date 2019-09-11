@@ -96,14 +96,15 @@ class Puppet::Provider::Rest < Puppet::Provider
   end
 
   def self.get_json_from_url(url)
+    max_retries = @max_retries
     failed_rest_handler = Proc.new do |exception, attempt_number, total_delay|
-      Puppet.warning "Unable to contact Razor Server (#{exception.class}), attempt #{attempt_number} out of #{@max_retries}"
+      Puppet.warning "Unable to contact Razor Server (#{exception.class}), attempt #{attempt_number} out of #{max_retries}"
     end
 
     response = nil
     begin
-      with_retries(:max_tries => @max_retries, :handler => failed_rest_handler) do |attempt_number|
-        Puppet.debug "Trying to contact Razor Server, try #{attempt_number} out of #{@max_retries}"
+      with_retries(:max_tries => max_retries, :handler => failed_rest_handler) do |attempt_number|
+        Puppet.debug "Trying to contact Razor Server, try #{attempt_number} out of #{max_retries}"
         response = RestClient.get url
       end
     rescue => e
