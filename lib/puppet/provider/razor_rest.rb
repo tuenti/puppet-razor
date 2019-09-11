@@ -103,6 +103,7 @@ class Puppet::Provider::Rest < Puppet::Provider
     response = nil
     begin
       with_retries(:max_tries => @max_retries, :handler => self.failed_rest_handler) do |attempt_number|
+        Puppet.debug "Trying to concat Razor Server, try #{attempt_number} out of #{@max_retries}"
         response = RestClient.get url
       end
     rescue => e
