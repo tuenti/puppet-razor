@@ -112,9 +112,11 @@ class razor (
   # Create resources
   Hash[String, Hash] $tasks       = {},
   Hash[String, Hash] $brokers     = {},
+  Hash[String, Hash] $hooks       = {},
   Hash[String, Hash] $tags        = {},
   Hash[String, Hash] $repos       = {},
   Hash[String, Hash] $api_brokers = {},
+  Hash[String, Hash] $api_hooks   = {},
   Hash[String, Hash] $policies    = {},
 
   # Override defaults
