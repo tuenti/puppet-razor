@@ -17,4 +17,7 @@ Puppet::Type.newtype(:razor_hook) do
     desc "The hook configuration (Hash)"
   end
   
+  newproperty(:ignore_changes) do
+    desc "Update hook if configuration changes are found (Boolean)"
+  end
 end

@@ -55,12 +55,16 @@ Puppet::Type.type(:razor_hook).provide :rest, :parent => Puppet::Provider::Rest 
   end
   
   def update_hook
-    # Hook does not provide an update function
-    Puppet.warning("Razor REST API does not provide an update function for the hook.")
-    Puppet.warning("Will attempt a delete and create.")
-    
-    delete_hook
-    create_hook
+    if resource['ignore_changes']
+      Puppet.debug("ignore_changes present, skipping resource update due to configuration change")
+    else
+      # Hook does not provide an update function
+      Puppet.warning("Razor REST API does not provide an update function for the hook.")
+      Puppet.warning("Will attempt a delete and create.")
+      
+      delete_hook
+      create_hook
+    end
   end  
   
   def delete_hook
