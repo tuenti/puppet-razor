@@ -10,7 +10,7 @@
 # * compile_microkernel (boolean): See Params
 # * client_package_name (string): See Params
 # * client_package_version (string): Package version for Razor Client (Default: 'latest')
-# * client_package_mirror (string): See params
+# * gem_package_mirror (string): See params
 # * database_hostname (string): Hostname for Postgres DB (Default: 'localhost')
 # * database_name (string): Database name for Postgres DB (Default: 'razor_prod')
 # * database_username (string): Username for Postgres DB (Default: 'razor')
@@ -73,7 +73,6 @@ class razor (
 
   # Client
   String $client_package_name                    = $razor::params::client_package_name,
-  String $client_package_mirror                  = $razor::params::client_package_mirror,
   Variant[Undef, String] $client_package_version = undef,
 
   # DB
@@ -103,7 +102,8 @@ class razor (
   Variant[Undef,String] $mk_extension_checksum_type = undef,
 
   # Required Configuration
-  Array $match_nodes_on = $razor::params::match_nodes_on,
+  Array  $match_nodes_on     = $razor::params::match_nodes_on,
+  String $gem_package_mirror = $razor::params::gem_package_mirror,
 
   # Version-specific defaults
   Boolean $enable_new_ports_support = false,

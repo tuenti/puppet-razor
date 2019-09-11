@@ -13,13 +13,14 @@
 #
 # Nicolas Truyens <nicolas@truyens.com>
 #
-class razor::api (
+class razor::api inherits razor (
   String $hostname              = 'localhost',
   Variant[Undef, Integer] $port = undef,
   String $rest_client_version   = present,
   String $gem_provider          = 'puppet_gem',
+  String $gem_package_mirror    = $::razor::params::gem_package_mirror,
   # TODO - Shiro Authentication
-) {
+) inherits razor::params {
   # Parameters
   $config_dir = '/etc/razor'
 
@@ -50,7 +51,7 @@ class razor::api (
   # Dependency Gems Installation
   ensure_packages(['rest-client', 'retries'], {
     'ensure'          => $rest_client_version,
-    'install_options' => ['--source', $::razor::client_package_mirror],
+    'install_options' => ['--source', $gem_package_mirror],
     'provider'        => $gem_provider,
   })
 }
