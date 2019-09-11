@@ -16,7 +16,7 @@ class razor::config inherits razor {
       false => '',
       true  => $::razor::mk_extension_source ? {
         undef   => '',
-        default => $::razor::mk_extension_source,
+        default => "${::razor::data_root_path}/mk-extension.zip",
       },
     }
     $tmp_server_config = deep_merge(
