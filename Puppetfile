@@ -1,7 +1,6 @@
 # Forge Modules
 forge "https://forgeapi.puppetlabs.com"
 
-mod 'adrien/filemapper'
 mod 'puppet/archive'
 mod 'puppetlabs/apt'
 mod 'puppetlabs/augeas_core'
