@@ -32,6 +32,8 @@ PuppetLint::RakeTask.new :lint do |config|
   #  config.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
 end
 
+Ra10ke::RakeTask.new
+
 # Group tests
 desc "Run syntax, lint, and spec tests."
 task :test => [
