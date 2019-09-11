@@ -2,7 +2,6 @@
 forge "https://forgeapi.puppetlabs.com"
 
 mod 'adrien/filemapper'
-mod 'puppet/wget'
 mod 'puppet/archive'
 mod 'puppetlabs/apt'
 mod 'puppetlabs/augeas_core'
@@ -12,4 +11,3 @@ mod 'puppetlabs/stdlib'
 mod 'puppetlabs/tftp'
 mod 'puppetlabs/vcsrepo'
 mod 'puppetlabs/xinetd'
-mod 'reidmv/yamlfile'
