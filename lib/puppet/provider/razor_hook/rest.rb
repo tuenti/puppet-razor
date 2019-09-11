@@ -18,7 +18,7 @@ Puppet::Type.type(:razor_hook).provide :rest, :parent => Puppet::Provider::Rest 
 
     if @property_flush[:ignore_changes] == false
       update_hook
-    else
+    end
   end
 
   def self.instances
