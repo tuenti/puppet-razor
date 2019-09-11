@@ -101,7 +101,10 @@ class Puppet::Provider::Rest < Puppet::Provider
 
     response = nil
     begin
-      with_retries(:max_tries => max_retries, :handler => failed_rest_handler) do |attempt_number|
+      with_retries(:max_tries => max_retries,
+                   :handler => failed_rest_handler,
+                   :base_sleep_seconds => 1.0,
+                   :max_sleep_seconds => 5.0) do |attempt_number|
         Puppet.debug "Trying to contact Razor Server, try #{attempt_number} out of #{max_retries}"
         response = RestClient.get url
       end
