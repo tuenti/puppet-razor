@@ -179,6 +179,25 @@ razor_tag { 'small':
             Available providers are:
   * rest: REST provider for Razor broker
 
+#### razor_hook
+```
+razor_hook { 'counter':
+  ensure    => 'present',
+  hook_type => 'counter',
+  configuration => {},
+}
+```
+- name: The hook name
+- ensure: The basic property that the resource should be in.
+          Valid values are `present`, `absent`.
+- hook_type: The hook type
+- configuration: The hook configuration (Hash)
+- provider: The specific backend to use for this `razor_hook` resource. 
+            You will seldom need to specify this --- Puppet will usually
+            discover the appropriate provider for your platform.
+            Available providers are:
+  * rest: REST provider for Razor broker
+
 ## Compatibility
 * compile_microkernel only works on RHEL/CentOS/Fedora (Razor Microkernel constraint)
 * enable_server requires Postgres >= 9.1
