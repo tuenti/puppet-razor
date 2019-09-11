@@ -95,6 +95,7 @@ class Puppet::Provider::Rest < Puppet::Provider
 
   def self.get_json_from_url(url)
     max_retries = 5
+    response = nil
     begin
       with_retries(:max_tries => max_retries) do |attempt_number|
         response = RestClient.get url
