@@ -16,9 +16,7 @@ Puppet::Type.type(:razor_hook).provide :rest, :parent => Puppet::Provider::Rest 
       return
     end
 
-    if @property_flush[:ignore_changes] == false
-      update_hook
-    end
+    update_hook
   end
 
   def self.instances
@@ -57,8 +55,8 @@ Puppet::Type.type(:razor_hook).provide :rest, :parent => Puppet::Provider::Rest 
   end
 
   def update_hook
-    if resource['ignore_changes']
-      Puppet.debug("ignore_changes present, skipping resource update due to configuration change")
+    if resource[:ignore_changes]
+      Puppet.warning("ignore_changes present, skipping resource update due to configuration change")
     else
       # Hook does not provide an update function
       Puppet.warning("Razor REST API does not provide an update function for the hook.")
