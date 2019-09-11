@@ -13,7 +13,7 @@
 #
 # Nicolas Truyens <nicolas@truyens.com>
 #
-class razor::api inherits razor (
+class razor::api (
   String $hostname              = 'localhost',
   Variant[Undef, Integer] $port = undef,
   String $rest_client_version   = present,
