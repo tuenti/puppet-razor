@@ -13,8 +13,6 @@ class Puppet::Provider::Rest < Puppet::Provider
   confine :feature => :rest_client
   confine :feature => :retries
 
-  @max_retries = 10
-
   def initialize(value={})
     super(value)
     @property_flush = {}
@@ -96,7 +94,7 @@ class Puppet::Provider::Rest < Puppet::Provider
   end
 
   def self.get_json_from_url(url)
-    max_retries = @max_retries
+    max_retries = 10
     failed_rest_handler = Proc.new do |exception, attempt_number, total_delay|
       Puppet.warning "Unable to contact Razor Server (#{exception.class}), attempt #{attempt_number} out of #{max_retries}"
     end
