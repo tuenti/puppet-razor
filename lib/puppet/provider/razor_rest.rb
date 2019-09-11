@@ -64,6 +64,7 @@ class Puppet::Provider::Rest < Puppet::Provider
 
   def self.get_objects(type)
     rest = get_rest_info
+    # TODO: Take into account depth parameter
     url = "http://#{rest[:ip]}:#{rest[:port]}/api/collections/#{type}"
 
     responseJson = get_json_from_url(url)
