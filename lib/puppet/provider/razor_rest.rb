@@ -1,8 +1,9 @@
 begin
   require 'rest-client' if Puppet.features.rest_client?
   require 'json' if Puppet.features.json?
+  require 'retries' if Puppet.features.retries?
 rescue LoadError => e
-  Puppet.info "Razor Puppet module requires 'rest-client' and 'json' ruby gems."
+  Puppet.info "Razor Puppet module requires 'rest-client', 'json' and 'retries' ruby gems."
 end
 
 class Puppet::Provider::Rest < Puppet::Provider
@@ -10,6 +11,7 @@ class Puppet::Provider::Rest < Puppet::Provider
   
   confine :feature => :json
   confine :feature => :rest_client
+  confine :feature => :retries
   
   def initialize(value={})
     super(value)
@@ -92,8 +94,12 @@ class Puppet::Provider::Rest < Puppet::Provider
   end
   
   def self.get_json_from_url(url)
+    max_retries = 5
     begin
-      response = RestClient.get url
+      with_retries(:max_tries => max_retries) do |attempt_number| {
+        response = RestClient.get url
+        Puppet.warning "Unable to contact Razor Server, attempt #{attempt_number} out of #{max_retries}"
+      }
     rescue => e
       Puppet.debug "Razor REST response: "+e.inspect
       Puppet.warning "Unable to contact Razor Server through REST interface (#{url})"

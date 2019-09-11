@@ -48,7 +48,7 @@ class razor::api (
   }
 
   # Dependency Gems Installation
-  ensure_packages(['rest-client'], {
+  ensure_packages(['rest-client', 'retries'], {
     'ensure'          => $rest_client_version,
     'install_options' => ['--source', $::razor::client_package_mirror],
     'provider'        => $gem_provider,
