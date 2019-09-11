@@ -70,10 +70,12 @@ describe 'razor' do
             ) }
 
         it { should contain_class('razor::tftp') }
-          it { should contain_archive('http://boot.ipxe.org/undionly.kpxe') }
+          it { should contain_archive('/var/lib/tftpboot/undionly.kpxe').with(
+            'source' => 'http://boot.ipxe.org/undionly.kpxe'
+          ) }
           it { should contain_tftp__file('undionly.kpxe') }
-          it { should contain_archive('http://192.168.1.1:8080/api/microkernel/bootstrap').with(
-            'destination' => "/var/lib/tftpboot/bootstrap.ipxe"
+          it { should contain_archive('/var/lib/tftpboot/bootstrap.ipxe').with(
+            'source' => "http://192.168.1.1:8080/api/microkernel/bootstrap"
           ) }
           it { should contain_tftp__file('bootstrap.ipxe') }
 
@@ -101,8 +103,8 @@ describe 'razor' do
           'command' => "bash -c 'source /etc/puppetlabs/razor-server/razor-torquebox.sh; torquebox deploy /opt/puppetlabs/server/apps/razor-server/share/razor-server --env=production'",
         })}
 
-        it { should contain_archive('http://192.168.1.1:8150/api/microkernel/bootstrap').with(
-          'destination' => "/var/lib/tftpboot/bootstrap.ipxe"
+        it { should contain_archive('/var/lib/tftpboot/bootstrap.ipxe').with(
+          'source' => "http://192.168.1.1:8150/api/microkernel/bootstrap"
         ) }
 
         it { should contain_archive('/tmp/razor-microkernel.tar').with(
