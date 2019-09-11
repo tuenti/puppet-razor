@@ -6,25 +6,12 @@
 #
 # Victor Cabezas <vcabezas@tuenti.com>
 #
-class razor::mk_extension (
-  String                $source,
-  Variant[Undef,String] $checksum      = undef,
-  Variant[Undef,String] $checksum_type = undef,
-) {
+class razor::mk_extension {
 
   archive { "${::razor::data_root_path}/mk-extension.zip":
     ensure        => present,
-    source        => $source,
-    checksum      => $checksum,
-    checksum_type => $checksum_type,
-  }
-
-  ::razor::razor_yaml_setting{ 'all.mk_extension':
-    ensure => 'present',
-    value  => {
-      'all' => {
-        'mk_extension' => "${::razor::data_root_path}/mk-extension.zip",
-      },
-    },
+    source        => $::razor::mk_extension_source,
+    checksum      => $::razor::mk_extension_checksum,
+    checksum_type => $::razor::mk_extension_checksum_type,
   }
 }

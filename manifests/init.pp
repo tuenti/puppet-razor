@@ -21,6 +21,7 @@
 # * torquebox_package_version (string): Package version for Torquebox (Default: 'present')
 # * server_config_file (string): See Params
 # * server_base_config (hash): See Params
+# * server_config_override (hash): Server configuration file override options (Default: {})
 # * server_service_name (string): See Params
 # * server_hostname (string): The hostname of the TFTP server. (Default: $::ipaddress)
 # * tftp_root (string): The root directory for the TFTP server. (Default: undef)
@@ -67,6 +68,7 @@ class razor (
   Boolean $enable_db           = true,
   Boolean $enable_server       = true,
   Boolean $enable_tftp         = true,
+  Boolean $enable_mk_extension = false,
   Boolean $compile_microkernel = $razor::params::compile_microkernel,
 
   # Client
@@ -87,6 +89,7 @@ class razor (
   String $torquebox_package_version = 'present',
   String $server_config_file        = $razor::params::server_config_file,
   Hash   $server_base_config        = $razor::params::server_config_default,
+  Hash   $server_config_override    = {},
   String $server_service_name       = $razor::params::server_service_name,
 
   # TFTP
@@ -94,7 +97,10 @@ class razor (
   Variant[Undef, String] $tftp_root = undef,
 
   # Microkernel
-  String $microkernel_url = $razor::params::microkernel_url,
+  String                $microkernel_url            = $razor::params::microkernel_url,
+  Variant[Undef,String] $mk_extension_source        = undef,
+  Variant[Undef,String] $mk_extension_checksum      = undef,
+  Variant[Undef,String] $mk_extension_checksum_type = undef,
 
   # Required Configuration
   Array $match_nodes_on = $razor::params::match_nodes_on,
@@ -202,6 +208,8 @@ class razor (
   anchor { 'razor-server-dependencies': }
   anchor { 'razor-server-postinstall': }
 
+  include razor::config
+
   # Razor Client
   if $enable_client {
     contain razor::client
@@ -233,6 +241,11 @@ class razor (
     contain razor::tftp
 
     Anchor['razor-server-postinstall'] -> Class['razor::tftp']
+  }
+
+  # Microkernel extension
+  if $enable_mk_extension {
+    contain razor::mk_extension
   }
 
   # Razor Microkernel Compiler

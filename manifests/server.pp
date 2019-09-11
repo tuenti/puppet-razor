@@ -103,8 +103,6 @@ class razor::server inherits razor {
     }
   }
 
-  include 'razor::config'
-
   # Installation
   if ($::razor::enable_aio_support == false) {
     # Torquebox was auto-dependency < 1.0.0, but no longer by 1.3.0
@@ -117,28 +115,6 @@ class razor::server inherits razor {
   package { $::razor::server_package_name:
     ensure => $::razor::server_package_version,
   } ~>  Exec['razor-migrate-database']
-
-  # Configuration File
-  ::razor::razor_yaml_setting{ 'production.database_url':
-    ensure => 'present',
-    value  => {
-      'production'   => {
-        'database_url' => "jdbc:postgresql://${::razor::database_hostname}/${::razor::database_name}?user=${::razor::database_username}&password=${::razor::database_password}",
-      },
-    },
-  }
-
-  # Required configuration for database migration.
-  # Configuration file is purged on downgrade from 1.5 to 1.3...
-  ::razor::razor_yaml_setting{ 'all custom settings':
-    ensure => 'present',
-    value  => {
-      'all' => {
-        'repo_store_root' => $::razor::repo_store_path,
-        'match_nodes_on'  => $::razor::match_nodes_on,
-      },
-    },
-  }
 
   # Service
   service { $::razor::server_service_name:
@@ -187,9 +163,9 @@ class razor::server inherits razor {
   create_resources('razor_broker', $::razor::api_brokers)
 
   # Ordering
-  Package[$::razor::server_package_name] -> Concat[$::razor::server_config_path] -> Service[$::razor::server_service_name]
-  Concat[$::razor::server_config_path] ~> Exec['razor-migrate-database']
-  Concat[$::razor::server_config_path] ~> Service[$::razor::server_service_name]
+  Package[$::razor::server_package_name] -> File[$::razor::server_config_path] -> Service[$::razor::server_service_name]
+  File[$::razor::server_config_path] ~> Exec['razor-migrate-database']
+  File[$::razor::server_config_path] ~> Service[$::razor::server_service_name]
   Package[$::razor::server_package_name] -> Razor::Task<| |>
   Package[$::razor::server_package_name] -> Razor::Broker<| |>
   Service[$::razor::server_service_name] -> Razor_tag<| |>
