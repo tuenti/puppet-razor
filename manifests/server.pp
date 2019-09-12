@@ -174,9 +174,6 @@ class razor::server inherits razor {
   Razor::Task<| |>  -> Razor_policy<| |>
   Razor::Hook_type<| |> -> Razor_hook<| |>
   Razor::Broker<| |> -> Razor_broker<| |>
-  Package[$::razor::server_package_name] -> Razor::Task<| |>
-  Package[$::razor::server_package_name] -> Razor::Broker<| |>
-  Package[$::razor::server_package_name] -> Razor::Hook_type<| |>
   Service[$::razor::server_service_name] -> Razor_tag<| |>
   Service[$::razor::server_service_name] -> Razor_policy<| |>
   Service[$::razor::server_service_name] -> Razor_repo<| |>
