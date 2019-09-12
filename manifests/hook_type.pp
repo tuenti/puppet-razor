@@ -26,6 +26,9 @@ define razor::hook_type (
   ->
   file { "${root}/${name}.hook":
     ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
     source  => $source_,
     recurse => true,
   }

@@ -19,6 +19,9 @@ define razor::broker (
   ->
   file { "${root}/${name}.broker":
     ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
     source  => "puppet:///modules/${module}/${directory}/${name}.broker",
     recurse => true,
   }

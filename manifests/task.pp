@@ -25,6 +25,9 @@ define razor::task (
   ->
   file { "${root}/${name}.task":
     ensure  => 'directory',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
     source  => $source_,
     recurse => true,
   }
