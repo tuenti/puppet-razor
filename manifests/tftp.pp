@@ -22,7 +22,7 @@ class razor::tftp inherits razor {
     source => 'http://boot.ipxe.org/undionly.kpxe',
   } ->
 
-  tftp::file { $::razor::kpxe_undionly_filename,
+  tftp::file { $::razor::kpxe_undionly_filename:
     ensure => file,
     source => "${directory}/undionly.kpxe",
   }
@@ -32,7 +32,7 @@ class razor::tftp inherits razor {
     source => "http://${::razor::server_hostname}:${::razor::real_server_http_port}/api/microkernel/bootstrap",
   } ->
 
-  tftp::file { $::razor::ipxe_bootstrap_filename,
+  tftp::file { $::razor::ipxe_bootstrap_filename:
     ensure => file,
     source => "${directory}/bootstrap.ipxe",
   }
