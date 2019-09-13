@@ -101,7 +101,7 @@ class razor (
 
   # Microkernel
   String                $microkernel_url            = $razor::params::microkernel_url,
-  Varian[Undef,String]  $microkernel_checksum       = $razor::params::microkernel_checksum,
+  Variant[Undef,String] $microkernel_checksum       = $razor::params::microkernel_checksum,
   String                $microkernel_checksum_type  = $razor::params::microkernel_checksum_type,
   Variant[Undef,String] $mk_extension_source        = undef,
   Variant[Undef,String] $mk_extension_checksum      = undef,
