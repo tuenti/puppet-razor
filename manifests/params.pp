@@ -11,6 +11,8 @@
 #   * server_config_file (string): Filename for configuration of Razor Server
 #   * server_service_name (string): Name of the service that manages Razor Server
 #   * microkernel_url (string): URL of where to download Microkernel (tarball). Set undef to skip.
+#   * microkernel_checksum (string|undef): Microkernel file checksum
+#   * microkernel_checksum_type (string): Microkernel file checksum type
 #   * match_nodes_on (array): unique identifiers for the node (?)
 #
 class razor::params {
@@ -96,7 +98,9 @@ class razor::params {
     },
   }
 
-  $microkernel_url = 'http://links.puppetlabs.com/razor-microkernel-latest.tar'
+  $microkernel_url      = 'http://links.puppetlabs.com/razor-microkernel-latest.tar'
+  $microkernel_checksum = undef
+  $microkernel_type     = 'md5'
 
   $match_nodes_on = ['mac']
 }

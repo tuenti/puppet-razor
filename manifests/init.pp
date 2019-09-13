@@ -26,6 +26,8 @@
 # * server_hostname (string): The hostname of the TFTP server. (Default: $::ipaddress)
 # * tftp_root (string): The root directory for the TFTP server. (Default: undef)
 # * microkernel_url (string): See Params
+# * microkernel_checksum (string): See Params
+# * microkernel_checksum_type (string): See Params
 # * match_nodes_on (array): See Params
 # * enable_new_ports_support (boolean): Whether to use the new ports allocated from Razor 1.1.0  (Default: false)
 # * enable_aio_support (boolean): Whether to use AIO package paths from Razor 1.4.0  (Default: false)
@@ -99,6 +101,8 @@ class razor (
 
   # Microkernel
   String                $microkernel_url            = $razor::params::microkernel_url,
+  Varian[Undef,String]  $microkernel_checksum       = $razor::params::microkernel_checksum,
+  String                $microkernel_checksum_type  = $razor::params::microkernel_checksum_type,
   Variant[Undef,String] $mk_extension_source        = undef,
   Variant[Undef,String] $mk_extension_checksum      = undef,
   Variant[Undef,String] $mk_extension_checksum_type = undef,
