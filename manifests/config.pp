@@ -28,7 +28,9 @@ class razor::config inherits razor {
         'all' => {
           'repo_store_root' => $::razor::repo_store_path,
           'match_nodes_on'  => $::razor::match_nodes_on,
-          'mk_extension'    => $mk_extension_setting,
+          'microkernel'     => {
+            'extension-zip' => $mk_extension_setting,
+          },
         },
       }
     )
