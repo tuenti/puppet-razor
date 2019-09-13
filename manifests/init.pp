@@ -94,6 +94,8 @@ class razor (
   # TFTP
   String $server_hostname           = $::ipaddress,
   Variant[Undef, String] $tftp_root = undef,
+  String $kpxe_undionly_filename    = $razor::params::kpxe_undionly_filename,
+  String $ipxe_bootstrap_filename   = $razor::params::ipxe_bootstrap_filename,
 
   # Microkernel
   String                $microkernel_url            = $razor::params::microkernel_url,

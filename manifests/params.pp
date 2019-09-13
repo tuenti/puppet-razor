@@ -29,6 +29,9 @@ class razor::params {
   $server_package_name    = 'razor-server'
   $torquebox_package_name = 'razor-torquebox'
 
+  $kpxe_undionly_filename  = 'undionly.kpxe'
+  $ipxe_bootstrap_filename = 'bootstrap.ipxe'
+
   $server_config_file  = 'config.yaml'
   $server_service_name = 'razor-server'
   $server_config_default = {
