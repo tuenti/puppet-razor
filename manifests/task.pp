@@ -28,6 +28,7 @@ define razor::task (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
+    purge   => true,
     source  => $source_,
     recurse => true,
   }

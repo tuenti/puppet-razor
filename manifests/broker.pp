@@ -22,6 +22,7 @@ define razor::broker (
     owner   => 'root',
     group   => 'root',
     mode    => '0755',
+    purge   => true,
     source  => "puppet:///modules/${module}/${directory}/${name}.broker",
     recurse => true,
   }
