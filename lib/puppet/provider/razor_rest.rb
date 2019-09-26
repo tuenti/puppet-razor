@@ -21,16 +21,21 @@ class Puppet::Provider::Rest < Puppet::Provider
   def self.get_rest_info
     config_file = "/etc/razor/api.yaml"
 
-    data = File.read(config_file) or raise "Could not read setting file #{config_file}"
+    begin
+      data = File.read(config_file)
+    rescue
+      Puppet.warning "Could not read setting file #{config_file}, using default values"
+      data = '---'
+    end
     yamldata = YAML.load(data)
 
-    if yamldata.include?('hostname')
+    if yamldata.is_a?(Hash) && yamldata.include?('hostname')
       hostname = yamldata['hostname']
     else
       hostname = 'localhost'
     end
 
-    if yamldata.include?('api_port')
+    if yamldata.is_a?(Hash) && yamldata.include?('api_port')
       port = yamldata['api_port']
     else
       port = 8150
