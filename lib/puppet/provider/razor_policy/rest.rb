@@ -120,8 +120,8 @@ Puppet::Type.type(:razor_policy).provide :rest, :parent => Puppet::Provider::Res
 
     if current_state[:task] != @property_hash[:task]
       resourceHash = {
-        :name => resource[:name],
-        :task => @property_hash[:task],
+        :policy => resource[:name],
+        :task   => @property_hash[:task],
       }
       post_command('update-policy-task', resourceHash)
       updated = true
@@ -129,7 +129,7 @@ Puppet::Type.type(:razor_policy).provide :rest, :parent => Puppet::Provider::Res
 
     if current_state[:broker] != @property_hash[:broker]
       resourceHash = {
-        :name   => resource[:name],
+        :policy => resource[:name],
         :broker => @property_hash[:broker],
       }
       post_command('update-policy-broker', resourceHash)
@@ -138,8 +138,8 @@ Puppet::Type.type(:razor_policy).provide :rest, :parent => Puppet::Provider::Res
 
     if current_state[:repo] != @property_hash[:repo]
       resourceHash = {
-        :name => resource[:name],
-        :repo => @property_hash[:repo],
+        :policy => resource[:name],
+        :repo   => @property_hash[:repo],
       }
       post_command('update-policy-repo', resourceHash)
       updated = true
