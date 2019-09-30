@@ -118,18 +118,34 @@ Puppet::Type.type(:razor_policy).provide :rest, :parent => Puppet::Provider::Res
       change_status
     end
 
-    if current_state[:repo] != @property_hash[:repo]
-      # More magic with - and _
+    if current_state[:task] != @property_hash[:task]
+      resourceHash = {
+        :name => resource[:name],
+        :task => @property_hash[:task],
+      }
+      post_command('update-policy-task', resourceHash)
+      updated = true
+    end
+
+    if current_state[:broker] != @property_hash[:broker]
       resourceHash = {
         :name   => resource[:name],
-        "repo"  => @property_hash[:repo],
+        :broker => @property_hash[:broker],
+      }
+      post_command('update-policy-broker', resourceHash)
+      updated = true
+    end
+
+    if current_state[:repo] != @property_hash[:repo]
+      resourceHash = {
+        :name => resource[:name],
+        :repo => @property_hash[:repo],
       }
       post_command('update-policy-repo', resourceHash)
       updated = true
     end
 
     if current_state[:max_count] != @property_hash[:max_count]
-      # More magic with - and _
       resourceHash = {
         :name       => resource[:name],
         "max-count"  => @property_hash[:max_count],
