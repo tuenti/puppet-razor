@@ -118,6 +118,16 @@ Puppet::Type.type(:razor_policy).provide :rest, :parent => Puppet::Provider::Res
       change_status
     end
 
+    if current_state[:repo] != @property_hash[:repo]
+      # More magic with - and _
+      resourceHash = {
+        :name   => resource[:name],
+        "repo"  => @property_hash[:repo],
+      }
+      post_command('update-policy-repo', resourceHash)
+      updated = true
+    end
+
     if current_state[:max_count] != @property_hash[:max_count]
       # More magic with - and _
       resourceHash = {
