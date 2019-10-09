@@ -27,6 +27,16 @@ class razor::tftp inherits razor {
     source => "${directory}/undionly.kpxe",
   }
 
+  # ipxe.efi
+  archive { "${directory}/ipxe.efi":
+    source => 'http://boot.ipxe.org/ipxe.efi',
+  } ->
+
+  tftp::file { $::razor::ipxe_efi_filename:
+    ensure => file,
+    source => "${directory}/ipxe.efi",
+  }
+
   # bootstrap.ipxe
   archive { "${directory}/bootstrap.ipxe":
     source => "http://${::razor::server_hostname}:${::razor::real_server_http_port}/api/microkernel/bootstrap",
