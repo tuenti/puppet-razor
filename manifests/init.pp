@@ -25,6 +25,10 @@
 # * server_service_name (string): See Params
 # * server_hostname (string): The hostname of the TFTP server. (Default: $::ipaddress)
 # * tftp_root (string): The root directory for the TFTP server. (Default: undef)
+# * ipxe_efi_filename(string): The location where to place ipxe.efi file
+# * kpxe_undionly_filename(string): The location where to place undionly.kpxe file
+# * ipxe_bootstrap_filename(string): The location where to place bootstrap.ipxe file
+# * http_proxy(string): HTTP proxy to be used to download ipxe needed files (Default: undef)
 # * microkernel_url (string): See Params
 # * microkernel_checksum (string): See Params
 # * microkernel_checksum_type (string): See Params
@@ -99,6 +103,7 @@ class razor (
   String $ipxe_efi_filename         = $razor::params::ipxe_efi_filename,
   String $kpxe_undionly_filename    = $razor::params::kpxe_undionly_filename,
   String $ipxe_bootstrap_filename   = $razor::params::ipxe_bootstrap_filename,
+  String $http_proxy                = undef,
 
   # Microkernel
   String                $microkernel_url            = $razor::params::microkernel_url,

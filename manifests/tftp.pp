@@ -19,7 +19,8 @@ class razor::tftp inherits razor {
 
   # undionly.kpxe
   archive { "${directory}/undionly.kpxe":
-    source => 'http://boot.ipxe.org/undionly.kpxe',
+    source     => 'http://boot.ipxe.org/undionly.kpxe',
+    http_proxy => $::razor::http_proxy,
   } ->
 
   tftp::file { $::razor::kpxe_undionly_filename:
@@ -29,7 +30,8 @@ class razor::tftp inherits razor {
 
   # ipxe.efi
   archive { "${directory}/ipxe.efi":
-    source => 'http://boot.ipxe.org/ipxe.efi',
+    source     => 'http://boot.ipxe.org/ipxe.efi',
+    http_proxy => $::razor::http_proxy,
   } ->
 
   tftp::file { $::razor::ipxe_efi_filename:
