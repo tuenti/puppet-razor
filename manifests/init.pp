@@ -88,14 +88,15 @@ class razor (
   Variant[Undef, String] $database_password = undef,
 
   # Server
-  String $server_package_name       = $razor::params::server_package_name,
-  String $server_package_version    = 'present',
-  String $torquebox_package_name    = $razor::params::torquebox_package_name,
-  String $torquebox_package_version = 'present',
-  String $server_config_file        = $razor::params::server_config_file,
-  Hash   $server_base_config        = $razor::params::server_config_default,
-  Hash   $server_config_override    = {},
-  String $server_service_name       = $razor::params::server_service_name,
+  String $server_package_name         = $razor::params::server_package_name,
+  String $server_package_version      = 'present',
+  String $torquebox_package_name      = $razor::params::torquebox_package_name,
+  String $torquebox_package_version   = 'present',
+  String $server_config_file          = $razor::params::server_config_file,
+  Hash   $server_base_config          = $razor::params::server_config_default,
+  Hash   $server_config_override      = {},
+  String $server_service_name         = $razor::params::server_service_name,
+  Stdlib::Absolutepath $server_tmpdir = '/tmp',
 
   # TFTP
   String $server_hostname           = $::ipaddress,

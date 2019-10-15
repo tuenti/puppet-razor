@@ -44,6 +44,11 @@ class razor::config inherits razor {
       ensure  => present,
       content => to_yaml($server_configuration),
     }
+
+    file { "/etc/sysconfig/${razor::server_service_name}":
+      ensure  => present,
+      content => epp("${module_name}/sysconfig.epp"),
+    }
   }
 
   # TODO: Move api configuration here

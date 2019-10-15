@@ -1,0 +1,8 @@
+# The location of the razor config files
+RAZOR_CONFIG=<%= $razor::real_config_dir %>config.yaml
+RAZOR_CONFIG_DEFAULTS=/opt/puppetlabs/server/apps/razor-server/config-defaults.yaml
+# The ports that the razor-server service should listen on
+# Default from packaging.
+RAZOR_HTTP_PORT=<%= $razor::real_server_http_port %>
+RAZOR_HTTPS_PORT=<%= $razor::real_server_https_port %>
+TMPDIR=<%= $razor::server_tmpdir %>
