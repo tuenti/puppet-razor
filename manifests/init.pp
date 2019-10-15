@@ -223,7 +223,8 @@ class razor (
   anchor { 'razor-server-dependencies': }
   anchor { 'razor-server-postinstall': }
 
-  include razor::config
+  contain razor::config
+  Class['razor::config'] ~> Service[$server_service_name]
 
   # Razor Client
   if $enable_client {
