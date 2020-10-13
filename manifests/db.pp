@@ -17,6 +17,6 @@ class razor::db inherits razor {
   # Create User/Role/Database
   postgresql::server::db { $::razor::database_name:
     user     => $::razor::database_username,
-    password => postgresql_password($::razor::database_username, $::razor::database_password),
+    password => postgresql::postgresql_password($::razor::database_username, $::razor::database_password),
   }
 }
