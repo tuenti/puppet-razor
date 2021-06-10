@@ -15,6 +15,7 @@ Puppet::Type.newtype(:razor_hook) do
 
   newproperty(:configuration) do
     desc "The hook configuration (Hash)"
+    defaultto {}
   end
 
   newparam(:ignore_changes, :boolean => true, :parent => Puppet::Parameter::Boolean) do

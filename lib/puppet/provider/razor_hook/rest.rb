@@ -27,21 +27,19 @@ Puppet::Type.type(:razor_hook).provide :rest, :parent => Puppet::Provider::Rest 
 
   # TYPE SPECIFIC
   def self.get_object(name, url)
-    # Trick puppet telling it that the actual resource status is the status that should
-    # be if ignore_changes is present, this will avoid that the resource is modified when it's
-    # configuration changes. Example taken from exec's resource returns property
-    # https://github.com/puppetlabs/puppet/blob/67ad21b64237eb4f808844bdaa3c2b0e4cdef95c/lib/puppet/type/exec.rb#L81
-    if resource[:ignore_changes]
-      return self.should
-    else
-      responseJson = get_json_from_url(url)
+    responseJson = get_json_from_url(url)
 
-      return {
-        :name           => responseJson['name'],
-        :hook_type      => responseJson['hook_type'],
-        :configuration  => responseJson['configuration'],
-        :ensure         => :present
-      }
+    if self.resource[:ignore_changes]
+      # Trick hook configuration making it think that the current value is the should value when 
+      # ignore_changes is true. Inspired by exec's resource returns property
+      responseJson['configuration'] = self.should['configuration']
+    end
+    {
+      :name           => responseJson['name'],
+      :hook_type      => responseJson['hook_type'],
+      :configuration  => responseJson['configuration'] ? responseJson['configuration'] : {},
+      :ensure         => :present
+    }
     end
   end
 
