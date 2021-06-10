@@ -15,16 +15,6 @@ Puppet::Type.newtype(:razor_hook) do
 
   newproperty(:configuration) do
     desc "The hook configuration (Hash)"
-
-    def retrieve
-      # This retrieve logic is taken from exec's resource returns property,
-      # hopefully it'll treat the resource as in_sync when ignore_changes is true and
-      # so not trigger any change
-      if self.resource[:ignore_changes]
-        should
-      end
-      :notrun
-    end
   end
 
   newparam(:ignore_changes, :boolean => true, :parent => Puppet::Parameter::Boolean) do
