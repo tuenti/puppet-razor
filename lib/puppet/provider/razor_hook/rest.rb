@@ -40,7 +40,6 @@ Puppet::Type.type(:razor_hook).provide :rest, :parent => Puppet::Provider::Rest 
       :configuration  => responseJson['configuration'] ? responseJson['configuration'] : {},
       :ensure         => :present
     }
-    end
   end
 
   def self.get_hook(name)
