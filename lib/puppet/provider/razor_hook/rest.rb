@@ -37,7 +37,7 @@ Puppet::Type.type(:razor_hook).provide :rest, :parent => Puppet::Provider::Rest 
     }
   end
 
-  def self.get_hook(name)
+  def get_hook(name)
     rest = get_rest_info
     url = "http://#{rest[:ip]}:#{rest[:port]}/api/collections/hooks/#{name}"
 
