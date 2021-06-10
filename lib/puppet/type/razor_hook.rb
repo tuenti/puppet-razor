@@ -21,9 +21,9 @@ Puppet::Type.newtype(:razor_hook) do
       # Trick hook configuration making it think that the current value is the should value when 
       # ignore_changes is true. Inspired by exec's resource returns property
       if self.resource[:ignore_changes]
-        return self.should[:ignore_changes]
+        return self.should[:configuration]
       else
-        self.resource[:configuration]
+        provider.get_hook(self.resource[:name])[:configuration]
       end
     end
   end
