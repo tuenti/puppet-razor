@@ -29,11 +29,6 @@ Puppet::Type.type(:razor_hook).provide :rest, :parent => Puppet::Provider::Rest 
   def self.get_object(name, url)
     responseJson = get_json_from_url(url)
 
-    if self.resource[:ignore_changes]
-      # Trick hook configuration making it think that the current value is the should value when 
-      # ignore_changes is true. Inspired by exec's resource returns property
-      responseJson['configuration'] = self.should['configuration']
-    end
     {
       :name           => responseJson['name'],
       :hook_type      => responseJson['hook_type'],

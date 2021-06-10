@@ -16,6 +16,16 @@ Puppet::Type.newtype(:razor_hook) do
   newproperty(:configuration) do
     desc "The hook configuration (Hash)"
     defaultto {}
+
+    def retrieve
+      # Trick hook configuration making it think that the current value is the should value when 
+      # ignore_changes is true. Inspired by exec's resource returns property
+      if self.resource[:ignore_changes]
+        return self.should[:ignore_changes]
+      else
+        self.resource[:configuration]
+      end
+    end
   end
 
   newparam(:ignore_changes, :boolean => true, :parent => Puppet::Parameter::Boolean) do
