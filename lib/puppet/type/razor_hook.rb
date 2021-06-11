@@ -23,7 +23,7 @@ Puppet::Type.newtype(:razor_hook) do
       if self.resource[:ignore_changes]
         return self.should[:configuration]
       else
-        provider.class.get_hook(self.resource[:name])[:configuration]
+        provider.fetch_hook(self.resource[:name])[:configuration]
       end
     end
   end
